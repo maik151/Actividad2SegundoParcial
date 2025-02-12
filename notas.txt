@@ -1,7 +1,0 @@
-Explicación:
-/public → Contiene archivos accesibles por el navegador (CSS, JS, imágenes).
-/includes → Archivos reutilizables como el encabezado, pie de página, menú y conexión a la base de datos.
-/pages → Contiene los archivos PHP principales para registrar, listar, editar y eliminar libros.
-/data → Contendrá los datos, ya sea en formato JSON o una base de datos SQLite.
-README.md → Documentación del proyecto.
-.gitignore → Para evitar subir archivos innecesarios al repositorio.
