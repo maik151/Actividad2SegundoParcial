@@ -1,15 +1,29 @@
-/* Estilos generales */
+/* ===== Variables de colores ===== */
+:root {
+    --color-primario: #0d0f0f;  /* Fondo oscuro */
+    --color-secundario: #18c37d; /* Verde neón */
+    --color-contains: #f1f7f7;
+    --color-texto: #f1f7f7;      /* Blanco */
+    --color-hover: #15a06b;      /* Verde oscuro para hover */
+    --color-formulario: #1c1f1f; /* Fondo de formularios */
+}
+
+/* ===== Estilos generales ===== */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
+    background-color: var(--color-contains);
+    color: var(--color-primario);
+    line-height: 1.6;
 }
 
-/* NAVBAR */
+/* ===== NAVBAR ===== */
 .navbar {
-    background-color: #0d0f0f; /* Fondo oscuro */
+    background-color: var(--color-primario);
     display: flex;
     align-items: center;
-    padding: 10px 40px;
+    justify-content: space-between;
+    padding: 15px 10%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -18,10 +32,9 @@ body {
     display: flex;
     align-items: center;
     text-decoration: none;
-    color: #18c37d; /* Verde neón */
+    color: var(--color-secundario);
     font-weight: bold;
     font-size: 20px;
-    margin-right: auto;
 }
 
 .navbar-logo img {
@@ -33,27 +46,119 @@ body {
 .navbar-menu {
     display: flex;
     list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.navbar-menu li {
-    margin: 0 15px;
+    gap: 20px;
 }
 
 .navbar-menu a {
     text-decoration: none;
-    color: #fff; /* Blanco */
+    color: var(--color-texto);
     font-weight: bold;
     font-size: 16px;
     transition: color 0.3s;
 }
 
 .navbar-menu a:hover {
-    color: #18c37d; /* Verde neón */
+    color: var(--color-hover);
 }
 
-/* Para resaltar la página activa */
 .navbar-menu .active {
-    color: #18c37d; /* Verde neón */
+    color: var(--color-secundario);
+}
+
+/* ===== Secciones Generales ===== */
+.container_Novedades {
+    max-width: 1200px;
+    margin: auto;
+    padding: 50px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: first baseline;
+}
+
+h2 {
+    color: var(--color-secundario);
+}
+
+/* ===== Estilos de las Cards ===== */
+.novedades_cards {
+    display: block;
+    justify-content: center;
+    gap: 2rem;
+    padding: 20px;
+}
+
+.cards_containner{
+    display: flex;
+}
+
+.card_Article {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 300px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    margin:1rem ;
+}
+
+.card_Article:hover {
+    transform: translateY(-5px);
+}
+
+.card_Img {
+    width: 100%;
+    height: auto;
+}
+
+.card_data {
+    padding: 20px;
+    background-color: var(--color-contains);
+}
+
+.card_autor {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.card_title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: var(--color-primario);
+}
+
+.card_button {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: var(--color-secundario);
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.card_button:hover {
+    background-color: var(--color-hover);
+}
+
+/* ===== Responsividad ===== */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .navbar-menu {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .novedades_cards {
+        flex-direction: column;
+        align-items: center;
+    }
 }

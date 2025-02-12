@@ -4,7 +4,7 @@
     </a>
     <ul class="navbar-menu">
         <li><a href="inicio.php" class="active">INICIO</a></li>
-        <li><a href="registrar.php">REGISTRAR LIBRO</a></li>
+        <li><a href="register.php">REGISTRAR LIBRO</a></li>
         <li><a href="listar.php">LISTADO DE LIBROS</a></li>
         <li><a href="contacto.php">CONTACTOS</a></li>
     </ul>
