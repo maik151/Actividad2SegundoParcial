@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
 /* ===== Variables de colores ===== */
 :root {
     --color-primario: #0d0f0f;  /* Fondo oscuro */
@@ -8,10 +10,15 @@
     --color-formulario: #1c1f1f; /* Fondo de formularios */
 }
 
+/* Estilo para el enlace activo */
+.active {
+    color: #fff; /* Cambia el color del texto a blanco o cualquier color que desees */
+  }
+
 /* ===== Estilos generales ===== */
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Montserrat', sans-serif;
     background-color: var(--color-contains);
     color: var(--color-primario);
     line-height: 1.6;
@@ -25,6 +32,7 @@ body {
     justify-content: space-between;
     padding: 15px 10%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 0 0 1rem 1rem ;
 }
 
 /* Logo */
@@ -38,7 +46,7 @@ body {
 }
 
 .navbar-logo img {
-    width: 40px;
+    width: 60px;
     margin-right: 10px;
 }
 
@@ -52,9 +60,10 @@ body {
 .navbar-menu a {
     text-decoration: none;
     color: var(--color-texto);
-    font-weight: bold;
-    font-size: 16px;
+    font-weight: 500;
+    font-size: 1.2rem;
     transition: color 0.3s;
+    padding: 0 1.7rem;
 }
 
 .navbar-menu a:hover {
@@ -161,4 +170,141 @@ h2 {
         flex-direction: column;
         align-items: center;
     }
+}
+
+/* ===================================== */
+/* Estilos del formulario de registro de libros */
+.container_register{
+    padding: 0 150px;
+}
+
+.box_form_register{
+    margin: 2rem;
+    background-color: #042222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image_register{
+    width: 300px;
+
+    margin-left: -10rem
+}
+
+.form-container_register{
+    padding: 3rem;
+     margin-left: 10rem;
+     width: 300px;
+     height: 400px;
+}
+
+.form-container_register h1{
+    color: var(--color-texto);
+}
+
+
+/* Contenedor principal del formulario */
+#form-libro {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+/* Estilos generales para los campos de entrada */
+.inputs_boxs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.inputs_boxs label {
+    color: var(--color-texto);
+    font-weight: 300;
+}
+
+.inputs_boxs input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Sección especial para Precio y Cantidad */
+.precio-cantidad {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.precio-cantidad .inputs_boxs input {
+    width: 100px; /* Tamaño reducido para los campos numéricos */
+}
+
+/* Botones */
+.button_boxs {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.button_boxs button {
+    background-color: #0d7377;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button_boxs button:hover {
+    background-color: #14a098;
+}
+
+/* Contenedor del mensaje */
+.register_messeage {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+/* Estilo general de los mensajes */
+.mensaje {
+    padding: 15px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+}
+
+/* Mensaje de éxito */
+.mensaje.exito {
+    background-color: #28a745; /* Verde */
+    color: white;
+    border-left: 5px solid #1e7e34;
+}
+
+/* Mensaje de error */
+.mensaje.error {
+    background-color: #dc3545; /* Rojo */
+    color: white;
+    border-left: 5px solid #a71d2a;
+}
+
+/* Animación para que desaparezca */
+@keyframes desaparecer {
+    0% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-10px); }
+}
+
+/* Aplicar la animación después de 3 segundos */
+.mensaje {
+    animation: desaparecer 2s ease-in-out forwards;
 }
