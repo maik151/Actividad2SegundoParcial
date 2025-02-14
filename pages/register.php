@@ -1,30 +1,33 @@
 <?php
 // incluimos el archivo de sesion.php para mantener la sesion
 include('../includes/session.php');
-
 require_once '../includes/functions.php';
 include '../includes/navbar.php';
 
+// isset comprueba que como tal si no existe ya una variable definida copn el nombre $SESSION_['libros]
+// si no existe una variable como tal, se crea o se inizializa un arreglo vacio con ese mismo nombre
 if (!isset($_SESSION['libros'])) {
     $_SESSION['libros'] = [];
 }
 
 
+$datos = manejarAccionFormulario();
+$mensaje = $datos['mensaje'];
+$mensajeError = $datos['mensajeError'];
 
-// Manejar el formulario
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $titulo = $_POST['titulo'] ?? '';
-    $autor = $_POST['autor'] ?? '';
-    $precio = $_POST['precio'] ?? 0;
-    $cantidad = $_POST['cantidad'] ?? 0;
+// Redireccionar para evitar el reenvío del formulario
+// Redirigir para evitar el reenvío del formulario
 
-    if (agregarLibro($titulo, $autor, $precio, $cantidad)) {
-        $mensaje = "Libro registrado exitosamente";
-    } else {
-        $mensajeError = "Error al registrar el libro";
-    }
-}
+// var_dump($_SERVER['REQUEST_METHOD']);
 ?>
+
+<?php if ($mensaje): ?>
+    <div class="mensaje exito"><i class="fa-regular fa-circle-check"></i><?php echo $mensaje; ?></div>
+<?php endif; ?>
+<?php if ($mensajeError): ?>
+    <div class="mensaje error"><i class="fa-regular fa-circle-xmark"></i><?php echo $mensajeError; ?></div>
+<?php endif; ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -39,19 +42,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div class="container_register">
         
-        <div class="register_messeage">
-            <?php if(isset($mensaje)): ?>
-                <div class="mensaje exito"><i class="fa-regular fa-circle-check"></i><?php echo $mensaje; ?></div>
-            <?php endif; ?>
-
-            <?php if(isset($mensajeError)): ?>
-                <div class="mensaje error"><i class="fa-regular fa-circle-xmark"></i><?php echo $mensajeError; ?></div>
-            <?php endif; ?>
-        </div>
-        
-
-        
-
         <div class="box_form_register">
             <div class="image_backgroud_register">
                 <img src="../public/images/1x/Recurso 6.png" class="image_register">
@@ -60,6 +50,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="form-container_register">
             <h1>Registro de Libro</h1>
                 <form id="form-libro" method="POST">
+                <div class="inputs_boxs">            
+                        <<input type="hidden" name="accion" value="agregar">
+                        <input type="hidden" id="index" name="index">
+                    </div>
                     <div class="inputs_boxs">            
                         <label for="titulo">Título del libro:</label>
                         <input type="text" id="titulo" name="titulo" required>
@@ -90,6 +84,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         function limpiarFormulario() {
             document.getElementById('form-libro').reset();
         }
+
+        // Verifica si existe un mensaje y lo oculta después de 3 segundos
+        document.addEventListener('DOMContentLoaded', function() {
+        const mensaje = document.querySelector('.mensaje');
+        if (mensaje) {
+            setTimeout(() => {
+                mensaje.style.opacity = '0';
+                setTimeout(() => mensaje.style.display = 'none', 500);
+            }, 3000);
+        }
+    });
     </script>
 </body>
 </html>

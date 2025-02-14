@@ -134,7 +134,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                     $mensajeError = "Error al registrar el libro";
                 }
                 break;
-                
+
             case 'actualizar':
                 $index = $_POST['index'] ?? -1;
                 $titulo = $_POST['titulo'] ?? '';
@@ -268,26 +268,26 @@ function renderizarTabla($libros){
         <?php endif; ?>
 
         <div class="form-container">
-            <h2>Registro de Libro</h2>
-            <form id="form-libro" method="POST">
-                <input type="hidden" name="accion" value="agregar">
-                <input type="hidden" id="index" name="index">
-                
-                <label for="titulo">Título del libro:</label><br>
-                <input type="text" id="titulo" name="titulo" required><br>
-                
-                <label for="autor">Nombre del autor:</label><br>
-                <input type="text" id="autor" name="autor" required><br>
-                
-                <label for="precio">Precio:</label><br>
-                <input type="number" id="precio" name="precio" step="0.01" min="0" required><br>
-                
-                <label for="cantidad">Cantidad de ejemplares:</label><br>
-                <input type="number" id="cantidad" name="cantidad" min="1" required><br>
-                
-                <button type="submit">Registrar</button>
-                <button type="button" onclick="limpiarFormulario()">Limpiar</button>
-            </form>
+                <h2>Registro de Libro</h2>
+                <form id="form-libro" method="POST">
+                    <input type="hidden" name="accion" value="agregar">
+                    <input type="hidden" id="index" name="index">
+                    
+                    <label for="titulo">Título del libro:</label><br>
+                    <input type="text" id="titulo" name="titulo" required><br>
+                    
+                    <label for="autor">Nombre del autor:</label><br>
+                    <input type="text" id="autor" name="autor" required><br>
+                    
+                    <label for="precio">Precio:</label><br>
+                    <input type="number" id="precio" name="precio" step="0.01" min="0" required><br>
+                    
+                    <label for="cantidad">Cantidad de ejemplares:</label><br>
+                    <input type="number" id="cantidad" name="cantidad" min="1" required><br>
+                    
+                    <button type="submit">Registrar</button>
+                    <button type="button" onclick="limpiarFormulario()">Limpiar</button>
+                </form>
         </div>
 
         <h2>Lista de Libros</h2>

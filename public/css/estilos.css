@@ -270,43 +270,41 @@ h2 {
 }
 
 /* Estilo general de los mensajes */
+/* Estilo para las notificaciones */
 .mensaje {
-    padding: 15px 20px;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: bold;
+    position: fixed;
+    top: 20px; /* La distancia desde la parte superior de la página */
+    left: 50%;
+    transform: translateX(-50%); /* Centra la notificación */
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Verde para éxito */
+    color: white;
+    border-radius: 5px;
     display: flex;
     align-items: center;
-    gap: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    opacity: 1;
-    transition: opacity 0.5s ease-out;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 9999; /* Asegura que se muestre sobre otros elementos */
+    opacity: 0;
+    animation: slideIn 0.5s forwards;
+    transition: opacity 1s ease-in-out;
 }
 
-/* Mensaje de éxito */
-.mensaje_exito {
-    background-color: #28a745; /* Verde */
-    color: white;
-    border-left: 5px solid #1e7e34;
-    display: relative;
+.mensaje.error {
+    background-color: #f44336; /* Rojo para error */
 }
 
-/* Mensaje de error */
-.mensaje_error {
-    background-color: #dc3545; /* Rojo */
-    color: white;
-    border-left: 5px solid #a71d2a;
-    display: relative;
+.mensaje i {
+    margin-right: 10px; /* Espacio entre el ícono y el texto */
 }
 
-/* Animación para que desaparezca */
-@keyframes desaparecer {
-    0% { opacity: 1; transform: translateY(0); }
-    90% { opacity: 1; transform: translateY(0); }
-    100% { opacity: 0; transform: translateY(-10px); }
-}
-
-/* Aplicar la animación después de 3 segundos */
-.mensaje {
-    animation: desaparecer 2s ease-in-out forwards;
+/* Animación de aparición de la notificación */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
 }
