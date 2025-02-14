@@ -1,23 +1,15 @@
 <?php
-session_start();
+// incluimos el archivo de sesion.php para mantener la sesion
+include('../includes/session.php');
+
+require_once '../includes/functions.php';
 include '../includes/navbar.php';
 
 if (!isset($_SESSION['libros'])) {
     $_SESSION['libros'] = [];
 }
 
-function agregarLibro($titulo, $autor, $precio, $cantidad) {
-    if (!empty($titulo) && !empty($autor) && $precio > 0 && $cantidad > 0) {
-        $_SESSION['libros'][] = [
-            'titulo' => htmlspecialchars($titulo),
-            'autor' => htmlspecialchars($autor),
-            'precio' => (float)$precio,
-            'cantidad' => (int)$cantidad
-        ];
-        return true;
-    }
-    return false;
-}
+
 
 // Manejar el formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

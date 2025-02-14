@@ -4,16 +4,36 @@
 // Codigo basado en propocionado para la gestion de productos.
 
 // index.php
+//Primero inciamos una sesion\
+//  Es una función en PHP que inicia una sesión o reanuda una sesión
+//   existente en el servidor. Una sesión permite almacenar información
+//    en el servidor y asociarla a un usuario en particular a través de
+//     un identificador único (ID de sesión). Esta información se mantiene
+//      disponible en todas las páginas durante la navegación del usuario,
+//       y se puede utilizar para almacenar datos como preferencias, información
+//        de login, o cualquier otro dato relevante entre diferentes solicitudes HTTP.
 session_start();
 
+// isset comprueba que como tal si no existe ya una variable definida copn el nombre $SESSION_['libros]
+// si no existe una variable como tal, se crea o se inizializa un arreglo vacio con ese mismo nombre
 if(!isset($_SESSION['libros'])){
     $_SESSION['libros'] = [];
 }
 
+// La funcion, retorna como tal la variable $SESSION_['libros], es decir devuelve el
+// contenido de la lista de libros
 function obtenerLibros(){
     return $_SESSION['libros'];
 }
 
+
+//Que hace la funcion agregarLibro()
+// la funcion toma como parametros $titlo, $autor, $precio, $cantidad
+// primero verifica que las variables de titulo, y autor, no sean diferentes de vacio (!empty)
+// y ademas verifica que $precio y $cantidad, sean mayores que 0
+// si ersa condicion se cumple, entonces manda a llamar a la variable libro y se asgina 
+//  un array con los valores puestos en el parametro
+// Devuelve true si se agregó con éxito, o false si los datos no son válidos.
 function agregarLibro($titulo, $autor, $precio, $cantidad){
     if(!empty($titulo) && !empty($autor) && $precio > 0 && $cantidad > 0){
         $_SESSION['libros'][] = [
@@ -27,6 +47,14 @@ function agregarLibro($titulo, $autor, $precio, $cantidad){
     return false;
 }
 
+//Que hace la funcion actualizar?
+// primero pasa como parametros todo adicionando el parametro $index
+// primero se valida que exista un array declarado dentro de $SESSION_['libros] en el indice indicado
+// luego hace las demas verificaciones (que titulo sea diferente de vacio (!empty) y que las variables numericas sean mayores a 0)
+
+// Si ce cumplen estas condiciens, entonces, en ese libro definido en $SESSION_['libros] segun el indice dado
+// se reemplazan los valores designados.
+// ademas de que si se cumplen todas las condiciones retorna true, si no retorna false
 function actualizarLibro($index, $titulo, $autor, $precio, $cantidad){
     if(isset($_SESSION['libros'][$index]) && !empty($titulo) && !empty($autor) && $precio > 0 && $cantidad > 0){
         $_SESSION['libros'][$index] = [
@@ -40,6 +68,14 @@ function actualizarLibro($index, $titulo, $autor, $precio, $cantidad){
     return false;
 }
 
+
+// Que hace lka funcion eliminar libro
+// eliminarLibro() topm,a como parametro un indice $index
+// 77 - comprueba que exista un libro asignado en el array $SESSION_['libros] definido en ese indice.
+// 78 - si se cumple la condicion, la funcion array_splice(), toma coomo parametro 3 cosas
+// el array, el indice, y los elementos que se quieren eliminar alrededor de ese indice, en este caso, 1
+// como tal se basa en el indice obtenido por el parametro, y elimina el elemento definido por el mismo indice
+// ademas de que retorna true si se cumple, o retorna false si no se cumple.
 function eliminarLibro($index){
     if(isset($_SESSION['libros'][$index])){
         array_splice($_SESSION['libros'], $index, 1);
@@ -48,7 +84,41 @@ function eliminarLibro($index){
     return false;
 }
 
+
+//Primero la condicion es si $_SERVER['REQUEST_METHOD] es si o si igual a POST entonces
+// recordemos que $_SERVER['REQUEST_METHOD] es una variable de ambito GLOBAL que contiene
+// el metodo HTTP utilizado para realizar la solicitud, es decir esta variable es igual a
+// a que metodo se uso para enviar los datos, en ester caso la condicion es, si se cumple que 
+// esta variable es si o si igual a POST, entonces se ejecuta todo lo demas
+
+//luego se crea otro condicional que comprueba que 
 // Gestionar el envío de valores del formulario
+
+//cuyando se envian datos a traves de POST, los datos del formulario, se almacenan en el arreglo
+// POST, donde cada campo del formulario se convierte en una relacion CLAVE-VALOR
+
+// En este caso 'accion', serial el nombre de un cambo del formulario, como puede ser input,
+//  o button (y efectivamente en la linea 163, 254, se define en el <input> la palabra 'accion' )
+// Entonces, $_POST['accion'] está accediendo al valor de ese campo específico que se envió en 
+// el formulario, permitiendo que el código PHP actúe según lo que el usuario haya elegido o ingresado.
+
+// Enotnces que hace esta linea
+// if(isset($_POST['accion'])) -> verifica que exista el la variable, la key, la clave
+// o el nombre 'accion', dentro del arreglo $_POST[], verifica que exista que este definido.
+
+
+// $_POST['accion'] ES UNA VARIABLE, EL VALOR ES EL VALOR QUE TENGA SEGUN LA CLAVE
+
+// si se cumnple esa condicion ahora por medio de un switch comprtueba que valoir tiene la variable
+// $_POST['acccion'], en el caso 1, si ese valor de la clave es igual a 'agregar', entonces ejecuta
+// obtiene el valor de la variable POST con respecto al titulo, autor, precio, y cantidad y si no existen o son null, asign valores por defecto
+// usando '??', \
+// depues de importar se puede decir el arreglo de $_POST[] los valores a las variables de
+// $titulo, $autor, $precio, $cantidad; se ponen esas variables como parametro de la funcion de
+// agregarLIbro(), la funcion como tal nos devuvle un valor bolleano, true, o false
+// la condicinante es si es true, entonces mostrar un mensaje de exito, sino, mostrar un mensaje de error
+// al registrar.
+
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
     if(isset($_POST['accion'])){
         switch($_POST['accion']){
@@ -64,7 +134,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                     $mensajeError = "Error al registrar el libro";
                 }
                 break;
-
+                
             case 'actualizar':
                 $index = $_POST['index'] ?? -1;
                 $titulo = $_POST['titulo'] ?? '';
@@ -90,6 +160,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         }
     }
 }
+
+
 
 $libros = obtenerLibros();
 

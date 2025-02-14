@@ -182,20 +182,20 @@ h2 {
     margin: 2rem;
     background-color: #042222;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 
 .image_register{
     width: 300px;
 
-    margin-left: -10rem
+    margin-left: 10rem
 }
 
 .form-container_register{
-    padding: 3rem;
-     margin-left: 10rem;
-     width: 300px;
+    padding-right: 6rem;
+
+     width: 500px;
      height: 400px;
 }
 
@@ -262,7 +262,7 @@ h2 {
 
 /* Contenedor del mensaje */
 .register_messeage {
-    position: fixed;
+    position: relative;
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
@@ -284,17 +284,19 @@ h2 {
 }
 
 /* Mensaje de éxito */
-.mensaje.exito {
+.mensaje_exito {
     background-color: #28a745; /* Verde */
     color: white;
     border-left: 5px solid #1e7e34;
+    display: relative;
 }
 
 /* Mensaje de error */
-.mensaje.error {
+.mensaje_error {
     background-color: #dc3545; /* Rojo */
     color: white;
     border-left: 5px solid #a71d2a;
+    display: relative;
 }
 
 /* Animación para que desaparezca */
