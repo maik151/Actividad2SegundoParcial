@@ -46,8 +46,10 @@ function actualizarLibro($index, $titulo, $autor, $precio, $cantidad){
 function eliminarLibro($index){
     if(isset($_SESSION['libros'][$index])){
         array_splice($_SESSION['libros'], $index, 1);
+        header("Location: " . $_SERVER['PHP_SELF']);
         return true;
     }
+
     return false;
 }
 
@@ -88,15 +90,27 @@ function manejarAccionFormulario(){
 
                 case 'eliminar':
                     $index = $_POST['index'] ?? -1;
-                    if(eliminarLibro($index)){
-                        $mensaje = "Libro eliminado exitosamente";
-                    } else {
-                        $mensajeError = "Error al eliminar el libro";
-                    }
-                    break;
-                }
+
+            // Si el libro se eliminó correctamente
+            if (eliminarLibro($index)) {
+                $_SESSION['mensaje'] = "Libro eliminado exitosamente";
+            } else {
+                $_SESSION['mensajeError'] = "Error al eliminar el libro";
             }
 
+            // Redirigir a la misma página para evitar que se reenvíe el POST
+            header("Location: " . $_SERVER['PHP_SELF']);
+            exit();
+            break;
+                    
+                }
+            }
+            // Mostrar mensaje si existe
+            $mensaje = $_SESSION['mensaje'] ?? null;
+            $mensajeError = $_SESSION['mensajeError'] ?? null;
+
+            // Limpiar los mensajes después de mostrarlos (opcional)
+            unset($_SESSION['mensaje'], $_SESSION['mensajeError']);
             return ['mensaje' => $mensaje, 'mensajeError' => $mensajeError];
 
 }
