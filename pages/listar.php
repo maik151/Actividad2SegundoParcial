@@ -11,7 +11,7 @@ $datos = manejarAccionFormulario();
 $mensaje = $datos['mensaje'];
 $mensajeError = $datos['mensajeError'];
 
-
+$libros = obtenerLibros();
 //Funcion de rtenderizar
 function renderizarTabla($libros){
     if(empty($libros)){
@@ -33,7 +33,7 @@ function renderizarTabla($libros){
                                 Eliminar
                             </button>
                         </form>
-                        <button>Editar</button>
+                        <button onclick='editarLibro(".$index.")'>Editar</button>
                     </td>
                 </tr>
             ";
