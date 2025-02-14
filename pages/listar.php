@@ -3,56 +3,52 @@
 include('../includes/session.php');
 require_once '../includes/functions.php';
 $libros = obtenerLibros();
-
-// Verificar si se recibió la acción de eliminar
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['accion'] === 'eliminar') {
-    $id = isset($_POST['id']) ? $_POST['id'] : '';
-
-    // Llamar a la función de eliminar desde functions.php
-    if (eliminarLibro($id)) {
-        $_SESSION['mensaje'] = "Libro eliminado exitosamente";
-        var_dump($_SESSION); // Verificar el estado de la sesión
-    } else {
-        $_SESSION['mensajeError'] = "Error al eliminar el libro";
-    }
-    
-    // Redirigir para evitar resubir el formulario al actualizar la página
-    header('Location: ../pages/listar.php');
-    exit();
-}
+var_dump($_SERVER['REQUEST_METHOD']);
+var_dumP($_POST);
 
 
-// Función para renderizar la tabla de libros
-function renderizarTabla($libros) {
-    if (empty($libros)) {
+$datos = manejarAccionFormulario();
+$mensaje = $datos['mensaje'];
+$mensajeError = $datos['mensajeError'];
+
+
+//Funcion de rtenderizar
+function renderizarTabla($libros){
+    if(empty($libros)){
         echo "<tr><td colspan='6'>No existen libros registrados</td></tr>";
     } else {
-        $contador = 1;
-        foreach ($libros as $libro) {
+        foreach($libros as $index => $libro){
             echo "
                 <tr>
-                    <td>" . $contador . "</td>
-                    <td>" . htmlspecialchars($libro['titulo']) . "</td>
-                    <td>" . htmlspecialchars($libro['autor']) . "</td>
-                    <td>$" . number_format($libro['precio'], 2) . "</td>
-                    <td>" . $libro['cantidad'] . "</td>
+                    <td>".($index+1)."</td>
+                    <td>".$libro['titulo']."</td>
+                    <td>".$libro['autor']."</td>
+                    <td>$".number_format($libro['precio'], 2)."</td>
+                    <td>".$libro['cantidad']."</td>
                     <td>
-                        <form method='POST' action='listar.php' style='display: inline;'>
+                        <form method='POST' style='display: inline;'>
                             <input type='hidden' name='accion' value='eliminar'>
-                            <input type='hidden' name='id' value='".htmlspecialchars($libro['id'])."'>
+                            <input type='hidden' name='index' value='".$index."'>
                             <button type='submit' onclick='return confirm(\"¿Está seguro de eliminar este libro?\")'>
                                 Eliminar
                             </button>
                         </form>
-                        <button onclick='editarLibro(\"" . htmlspecialchars($libro['id']) . "\")'>Editar</button>
+                        <button>Editar</button>
                     </td>
                 </tr>
             ";
-            $contador++;
         }
-    }
+    }   
 }
 ?>
+<?php if ($mensaje): ?>
+    <div class="mensaje"><i class="fa-regular fa-circle-check"></i><?php echo $mensaje; ?></div>
+<?php endif; ?>
+<?php if ($mensajeError): ?>
+    <div class="mensaje"><i class="fa-regular fa-circle-xmark"></i><?php echo $mensajeError; ?></div>
+<?php endif; ?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -66,16 +62,6 @@ function renderizarTabla($libros) {
     
     <div class="container">
         <h1>Lista de Libros</h1>
-
-        <!-- Mostrar mensaje de éxito o error -->
-        <div class="register_messeage">
-            <?php if(isset($_SESSION['mensaje'])): ?>
-                <div class="mensaje exito"><?php echo $_SESSION['mensaje']; unset($_SESSION['mensaje']); ?></div>
-            <?php elseif(isset($_SESSION['mensajeError'])): ?>
-                <div class="mensaje error"><?php echo $_SESSION['mensajeError']; unset($_SESSION['mensajeError']); ?></div>
-            <?php endif; ?>
-        </div>
-
         <table>
             <thead>
                 <tr>
@@ -97,6 +83,16 @@ function renderizarTabla($libros) {
         function editarLibro(id) {
             window.location.href = 'editar.php?id=' + encodeURIComponent(id);
         }
+        // Verifica si existe un mensaje y lo oculta después de 3 segundos
+        document.addEventListener('DOMContentLoaded', function() {
+        const mensaje = document.querySelector('.mensaje');
+        if (mensaje) {
+            setTimeout(() => {
+                mensaje.style.opacity = '0';  // Desaparece el mensaje
+                setTimeout(() => mensaje.style.display = 'none', 500); // Lo oculta completamente después de 0.5s
+            }, 3000);  // Espera 3 segundos antes de iniciar la animación
+        }
+});
     </script>
 </body>
 </html>

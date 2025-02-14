@@ -18,7 +18,7 @@ $mensajeError = $datos['mensajeError'];
 // Redireccionar para evitar el reenvío del formulario
 // Redirigir para evitar el reenvío del formulario
 
-// var_dump($_SERVER['REQUEST_METHOD']);
+var_dump($_SESSION['libros']);
 ?>
 
 <?php if ($mensaje): ?>
@@ -50,7 +50,7 @@ $mensajeError = $datos['mensajeError'];
             <div class="form-container_register">
             <h1>Registro de Libro</h1>
                 <form id="form-libro" method="POST">
-                <div class="inputs_boxs">            
+                    <div class="inputs_boxs">            
                         <<input type="hidden" name="accion" value="agregar">
                         <input type="hidden" id="index" name="index">
                     </div>
