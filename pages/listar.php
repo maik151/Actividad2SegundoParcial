@@ -33,11 +33,15 @@ function renderizarTabla($libros){
                                 Eliminar
                             </button>
                         </form>
-                        <button onclick='editarLibro(".$index.")'>Editar</button>
+                        
+                            <button type = 'button' onclick = 'editarLibro(".$index.")'>
+                                Editar
+                            </button>
                     </td>
                 </tr>
             ";
         }
+        
     }   
 }
 ?>
@@ -59,7 +63,28 @@ function renderizarTabla($libros){
 </head>
 <body>
     <?php include '../includes/navbar.php'; ?>
-    
+    <div id="modal-editar">
+        <h3>Editar Libro</h3>
+        <form id="form-libro2" method="POST">
+                    <input type="hidden" name="accion" value="agregar">
+                    <input type="hidden" id="index" name="index">
+                    
+                    <label for="titulo">Título del libro:</label><br>
+                    <input type="text" id="titulo" name="titulo" required><br>
+                    
+                    <label for="autor">Nombre del autor:</label><br>
+                    <input type="text" id="autor" name="autor" required><br>
+                    
+                    <label for="precio">Precio:</label><br>
+                    <input type="number" id="precio" name="precio" step="0.01" min="0" required><br>
+                    
+                    <label for="cantidad">Cantidad de ejemplares:</label><br>
+                    <input type="number" id="cantidad" name="cantidad" min="1" required><br>
+                    
+                    <button type="submit">Registrar</button>
+                    <button type="button" onclick="limpiarFormulario()">Limpiar</button>
+                </form>
+    </div>
     <div class="container">
         <h1>Lista de Libros</h1>
         <table>
@@ -78,11 +103,9 @@ function renderizarTabla($libros){
             </tbody>
         </table>
     </div>
-    
+
     <script>
-        function editarLibro(id) {
-            window.location.href = 'editar.php?id=' + encodeURIComponent(id);
-        }
+        
         // Verifica si existe un mensaje y lo oculta después de 3 segundos
         document.addEventListener('DOMContentLoaded', function() {
         const mensaje = document.querySelector('.mensaje');
@@ -92,7 +115,27 @@ function renderizarTabla($libros){
                 setTimeout(() => mensaje.style.display = 'none', 500); // Lo oculta completamente después de 0.5s
             }, 3000);  // Espera 3 segundos antes de iniciar la animación
         }
-});
+        });
+
+        function editarLibro(index) {
+            const libros = <?php echo json_encode($libros); ?>;
+            const libro = libros[index];
+            
+            document.getElementById('index').value = index;
+            document.getElementById('titulo').value = libro.titulo;
+            document.getElementById('autor').value = libro.autor;
+            document.getElementById('precio').value = libro.precio;
+            document.getElementById('cantidad').value = libro.cantidad;
+            
+            document.querySelector('input[name="accion"]').value = 'actualizar';
+            document.querySelector('button[type="submit"]').textContent = 'Actualizar';
+        }
+
+
+    
+
+
+
     </script>
 </body>
 </html>
