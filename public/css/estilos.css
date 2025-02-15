@@ -521,5 +521,61 @@ button {
     font-size: 18px; /* Ajusta el tamaño del icono */
 }
 
+.bodyContacts{
+    background-color: #042222;
+}
+.containnerContactos{
+    padding: 50px 150px 100px 150px;
+    color: #d4d4d4;
+}
 
+.seccion-ubicacion-experiencia {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.bloque-ubicacion, .bloque-experiencia {
+    width: 45%;
+}
+.contenedor-mapa {
+    width: 500px;
+    height: 500px;
+    background-color: #222;
+    display: block;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    margin: 10px 0;
+}
+.iconos-redes span {
+    font-size: 24px;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+.facebook:hover { color: #3b5998; }
+.twitter:hover { color: #1da1f2; }
+.instagram:hover { color: #e4405f; }
+.youtube:hover { color: #ff0000; }
+textarea, input {
+    width: 100%;
+    padding: 100px 0 100px 0;
+    margin: 5px 0;
+    border-radius: 5px;
+    border: none;
+}
+.boton-enviar {
+    background-color: #00c853;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+.boton-enviar:hover {
+    background-color: #009624;
+}
 
