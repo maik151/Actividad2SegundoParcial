@@ -18,7 +18,6 @@ $mensajeError = $datos['mensajeError'];
 // Redireccionar para evitar el reenvío del formulario
 // Redirigir para evitar el reenvío del formulario
 
-var_dump($_SESSION['libros']);
 ?>
 
 <?php if ($mensaje): ?>
@@ -94,7 +93,7 @@ var_dump($_SESSION['libros']);
                 setTimeout(() => mensaje.style.display = 'none', 500);
             }, 3000);
         }
-    });
+        });
     </script>
 </body>
 </html>

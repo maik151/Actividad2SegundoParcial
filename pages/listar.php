@@ -3,8 +3,6 @@
 include('../includes/session.php');
 require_once '../includes/functions.php';
 $libros = obtenerLibros();
-var_dump($_SERVER['REQUEST_METHOD']);
-var_dumP($_POST);
 
 
 $datos = manejarAccionFormulario();
@@ -29,14 +27,14 @@ function renderizarTabla($libros){
                         <form method='POST' style='display: inline;'>
                             <input type='hidden' name='accion' value='eliminar'>
                             <input type='hidden' name='index' value='".$index."'>
-                            <button type='submit' onclick='return confirm(\"¿Está seguro de eliminar este libro?\")'>
-                                Eliminar
+                            <button class = 'buttonT1' type='submit' onclick='return confirm(\"¿Está seguro de eliminar este libro?\")'>
+                                <i class=\"fa-regular fa-trash-can\"></i>
                             </button>
                         </form>
-                        
-                            <button type = 'button' onclick = 'editarLibro(".$index.")'>
-                                Editar
-                            </button>
+
+                        <button class = 'buttonT2' type='button' onclick='editarLibro(".$index.")'>
+                            <i class=\"fa-solid fa-pencil\"></i>
+                        </button>
                     </td>
                 </tr>
             ";
@@ -59,13 +57,16 @@ function renderizarTabla($libros){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Libros</title>
-    <link rel="stylesheet" href="../public/css/estilos.css">
+    <link rel="stylesheet" href="public/css/estilos.css">
+    <script src="https://kit.fontawesome.com/c13ee7e503.js" crossorigin="anonymous"></script>
 </head>
-<body>
-    <?php include '../includes/navbar.php'; ?>
-    <div id="modal-editar">
-        <h3>Editar Libro</h3>
-        <form id="form-libro2" method="POST">
+<body >
+<?php include '../includes/navbar.php'; ?>
+    <div class="listarContainner">
+        <div id="modal-editar">
+            <div class="modal-content">
+                <h3>Editar Libro</h3>
+                <form id="form-libro2" method="POST">
                     <input type="hidden" name="accion" value="agregar">
                     <input type="hidden" id="index" name="index">
                     
@@ -81,29 +82,30 @@ function renderizarTabla($libros){
                     <label for="cantidad">Cantidad de ejemplares:</label><br>
                     <input type="number" id="cantidad" name="cantidad" min="1" required><br>
                     
-                    <button type="submit">Registrar</button>
-                    <button type="button" onclick="limpiarFormulario()">Limpiar</button>
+                    <button type="submit">Actualizar</button>
+                    <div type="">Presione ESC para salir</div>
                 </form>
+            </div>
+        </div>
+        <div class="container">
+            <h1>Lista de Libros</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th id='idTable'>#ID</th>
+                        <th id='tituloTable'>Título</th>
+                        <th id='autorTable'>Autor</th>
+                        <th id='precioTable'>Precio</th>
+                        <th id='cantidadTable'>Cantidad</th>
+                        <th id='accionesTable'>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php renderizarTabla($libros); ?>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="container">
-        <h1>Lista de Libros</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Título</th>
-                    <th>Autor</th>
-                    <th>Precio</th>
-                    <th>Cantidad</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php renderizarTabla($libros); ?>
-            </tbody>
-        </table>
-    </div>
-
     <script>
         
         // Verifica si existe un mensaje y lo oculta después de 3 segundos
@@ -129,13 +131,36 @@ function renderizarTabla($libros){
             
             document.querySelector('input[name="accion"]').value = 'actualizar';
             document.querySelector('button[type="submit"]').textContent = 'Actualizar';
+            
+            // Mostrar el modal
+            const modal = document.getElementById('modal-editar');
+            modal.style.display = 'block';
+
+            // Cerrar modal al hacer clic fuera del formulario
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            };
+
+            // Cerrar modal al presionar Escape
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    modal.style.display = 'none';
+                }
+            });
+
         }
-
-
-    
-
-
-
+        
+        document.addEventListener('DOMContentLoaded', function() {
+        const mensaje = document.querySelector('.mensaje');
+        if (mensaje) {
+            setTimeout(() => {
+                mensaje.style.opacity = '0';
+                setTimeout(() => mensaje.style.display = 'none', 500);
+            }, 3000);
+        }
+        });
     </script>
 </body>
 </html>

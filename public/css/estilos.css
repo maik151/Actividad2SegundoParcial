@@ -10,11 +10,6 @@
     --color-formulario: #1c1f1f; /* Fondo de formularios */
 }
 
-/* Estilo para el enlace activo */
-.active {
-    color: #fff; /* Cambia el color del texto a blanco o cualquier color que desees */
-  }
-
 /* ===== Estilos generales ===== */
 body {
     margin: 0;
@@ -32,10 +27,9 @@ body {
     justify-content: space-between;
     padding: 15px 10%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 0 0 1rem 1rem ;
+    border-radius: 0 0 1rem 1rem;
 }
 
-/* Logo */
 .navbar-logo {
     display: flex;
     align-items: center;
@@ -50,7 +44,6 @@ body {
     margin-right: 10px;
 }
 
-/* Menú de navegación */
 .navbar-menu {
     display: flex;
     list-style: none;
@@ -62,8 +55,8 @@ body {
     color: var(--color-texto);
     font-weight: 500;
     font-size: 1.2rem;
-    transition: color 0.3s;
     padding: 0 1.7rem;
+    transition: color 0.3s;
 }
 
 .navbar-menu a:hover {
@@ -81,7 +74,6 @@ body {
     padding: 50px 20px;
     display: flex;
     flex-direction: column;
-    justify-content: first baseline;
 }
 
 h2 {
@@ -91,12 +83,11 @@ h2 {
 /* ===== Estilos de las Cards ===== */
 .novedades_cards {
     display: block;
-    justify-content: center;
     gap: 2rem;
     padding: 20px;
 }
 
-.cards_containner{
+.cards_containner {
     display: flex;
 }
 
@@ -108,7 +99,7 @@ h2 {
     width: 300px;
     text-align: center;
     transition: transform 0.3s ease;
-    margin:1rem ;
+    margin: 1rem;
 }
 
 .card_Article:hover {
@@ -176,7 +167,7 @@ h2 {
 /* Estilos del formulario de registro de libros */
 .container_register {
     padding: 0 20px;
-    max-width: 1200px; /* Limitar el ancho máximo */
+    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -241,8 +232,8 @@ h2 {
 }
 
 .inputs_boxs input:focus {
-    border-color: #0d7377; /* Color de borde al hacer foco */
-    box-shadow: 0 0 8px rgba(13, 115, 119, 0.4); /* Sombra en el foco */
+    border-color: #0d7377;
+    box-shadow: 0 0 8px rgba(13, 115, 119, 0.4);
 }
 
 /* Estilo para la sección de Precio y Cantidad */
@@ -278,11 +269,11 @@ h2 {
 
 .button_boxs button:hover {
     background-color: #14a098;
-    transform: translateY(-2px); /* Efecto de elevación */
+    transform: translateY(-2px);
 }
 
 .button_boxs button:active {
-    transform: translateY(0); /* Devuelve el botón a su posición normal al hacer clic */
+    transform: translateY(0);
 }
 
 /* Contenedor del mensaje */
@@ -295,34 +286,33 @@ h2 {
 }
 
 /* Estilo general de los mensajes */
-/* Estilo para las notificaciones */
 .mensaje {
     position: fixed;
-    top: 20px; /* La distancia desde la parte superior de la página */
+    top: 20px;
     left: 50%;
-    transform: translateX(-50%); /* Centra la notificación */
+    transform: translateX(-50%);
     padding: 10px 20px;
-    background-color: #4CAF50; /* Verde para éxito */
+    background-color: #4CAF50;
     color: white;
     border-radius: 5px;
     display: flex;
     align-items: center;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 9999; /* Asegura que se muestre sobre otros elementos */
+    z-index: 9999;
     opacity: 0;
     animation: slideIn 0.5s forwards;
     transition: opacity 1s ease-in-out;
 }
 
 .mensaje.error {
-    background-color: #f44336; /* Rojo para error */
+    background-color: #f44336;
 }
 
 .mensaje i {
-    margin-right: 10px; /* Espacio entre el ícono y el texto */
+    margin-right: 10px;
 }
 
-/* Animación de aparición de la notificación */
+/* Animación de aparición */
 @keyframes slideIn {
     from {
         opacity: 0;
@@ -333,3 +323,203 @@ h2 {
         transform: translateX(-50%) translateY(0);
     }
 }
+
+
+.listarContainner{
+    
+    padding: 0 150px 0 150px;
+
+}
+
+/* Estilos para el modal */
+
+#modal-editar {
+    display: none;
+    position: fixed; /* Cambié de absolute a fixed para asegurar que se quede en la pantalla */
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* Aumenté la opacidad del fondo */
+}
+
+/* Contenido del modal */
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto; /* Ajusté el margen para mejor centrado */
+    padding: 30px;
+    border: 1px solid #888;
+    width: 50%; /* Ancho del modal ajustado */
+    border-radius: 12px; /* Borde más redondeado */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Más sombra */
+    animation: animarModal 0.5s ease-out; /* Animación más suave */
+    transition: transform 0.3s ease-in-out; /* Transición suave */
+}
+
+/* Animación de aparición */
+@keyframes animarModal {
+    from {
+        opacity: 0;
+        transform: translateY(-50px); /* Inicia desde arriba */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); /* Llega al lugar final */
+    }
+}
+
+/* Efecto de hover para los botones */
+button:hover {
+    background-color: #4CAF50; /* Color de fondo al hacer hover */
+    color: white; /* Cambio de color al pasar el cursor */
+    cursor: pointer;
+    transform: scale(1.05); /* Efecto de aumento */
+    transition: all 0.3s ease;
+}
+
+/* Botones de cerrar/modal */
+.close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+}
+
+/* Hover para el botón de cerrar */
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Fondo oscuro para el área de fondo del modal */
+#modal-editar.active {
+    display: block; /* Muestra el modal cuando está activo */
+}
+
+/* Estilo del formulario dentro del modal */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5px; /* Separación entre los campos */
+}
+
+/* Estilo para los campos del formulario */
+input[type="text"], input[type="number"], textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box; /* Asegura que el padding no afecte el tamaño */
+}
+
+input[type="text"]:focus, input[type="number"]:focus, textarea:focus {
+    border-color: #007BFF; /* Cambia el color al enfocarse */
+    outline: none; /* Elimina el borde azul predeterminado del navegador */
+}
+
+
+
+table {
+    width: 100%;
+    border-collapse: separate; /* Cambié a separate para que el borde redondeado funcione */
+    border-spacing: 0; /* Elimina cualquier espacio entre celdas */
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border-radius: 8px; /* Borde redondeado para la tabla */
+    overflow: hidden; /* Asegura que los bordes redondeados no se vean cortados */
+}
+
+/* Cabecera de la tabla */
+th {
+    background-color: #d4d4d4;
+    color: rgb(136, 136, 136);
+    padding: 12px 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: 1px solid #ddd; /* Borde completo */
+    text-align: center; /* Alineación centrada */
+    vertical-align: middle;
+}
+
+/* Celdas de la tabla */
+td {
+    background-color: #f9f9f9;
+    color: #333;
+    padding: 7px 15px;
+    border: 1px solid #dddddd00; /* Borde completo */
+    vertical-align: middle;
+    text-align: center;
+}
+
+/* Especificar tamaños personalizados para cada columna */
+#idTable, #cantidadTable, #precioTable {
+    width: 80px; /* Las celdas de ID, Cantidad y Precio son más pequeñas */
+}
+
+t#tituloTable, #autorTable {
+    width: 200px; /* Las celdas de Título y Autor son más grandes */
+}
+
+#accionesTable {
+    width: 120px; /* La columna de Acciones se adapta a su contenido */
+}
+
+/* Alineación específica para la columna de Acciones */
+td:last-child {
+    text-align: center;
+}
+
+/* Estilo para filas pares */
+tr:nth-child(even) td {
+    background-color: #f0f0f0;
+}
+
+/* Hover para filas */
+tr:hover td {
+    background-color: #e0f7fa;
+}
+
+/* Botones */
+button {
+    margin: 2px;
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+}
+
+/* Botón Eliminar */
+.buttonT1 {
+    background-color: #ad1a2c;
+    color: white;
+    border-radius: 50%;
+    width: 40px;  /* Ajusta el tamaño del botón */
+    height: 40px; /* Ajusta el tamaño del botón */
+    border: none; /* Elimina el borde */
+    cursor: pointer; /* Añade el cursor de mano al pasar sobre el botón */
+}
+
+/* Botón Editar */
+.buttonT2 {
+    background-color: #005add;
+    color: white;
+    border-radius: 50%;
+    width: 40px;  /* Ajusta el tamaño del botón */
+    height: 40px; /* Ajusta el tamaño del botón */
+    border: none; /* Elimina el borde */
+    cursor: pointer; /* Añade el cursor de mano al pasar sobre el botón */
+}
+
+/* Iconos dentro de los botones */
+.buttonT1 i, .buttonT2 i {
+    font-size: 18px; /* Ajusta el tamaño del icono */
+}
+
+
+
