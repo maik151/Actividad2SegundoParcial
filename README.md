@@ -49,15 +49,12 @@ Miproyecto/
 
 Clonar el repositorio o descargar los archivos:
 
-git clone https://github.com/tuusuario/miproyecto.git
+git clone (https://github.com/maik151/Actividad2SegundoParcial.git)
 
 Mover la carpeta al directorio de XAMPP:
 
 mv miproyecto /xampp/htdocs/
 
-Iniciar Apache y MySQL en XAMPP.
-
-Importar la base de datos desde phpMyAdmin con el archivo SQL correspondiente.
 
 Abrir el navegador y acceder al proyecto:
 
@@ -66,8 +63,6 @@ http://localhost/miproyecto/
 🛠️ Tecnologías Utilizadas
 
 PHP → Lógica del servidor y gestión de datos.
-
-MySQL → Base de datos para almacenar la información de los libros.
 
 HTML/CSS → Estructura y estilos de la interfaz de usuario.
 
